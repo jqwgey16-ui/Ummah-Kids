@@ -1,0 +1,269 @@
+{
+  "entities": {
+    "Story": {
+      "title": "Story",
+      "description": "An Islamic children's story",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "titleEn": { "type": "string" },
+        "titleUr": { "type": "string" },
+        "category": { "type": "string" },
+        "prophetName": { "type": "string" },
+        "readingTime": { "type": "number" },
+        "ageGroup": { "type": "string", "enum": ["4-6", "7-9", "10-12", "all"] },
+        "coverImage": { "type": "string" },
+        "shortDescriptionEn": { "type": "string" },
+        "shortDescriptionUr": { "type": "string" },
+        "contentEn": { "type": "string" },
+        "contentUr": { "type": "string" },
+        "lessonsEn": { "type": "array" },
+        "lessonsUr": { "type": "array" },
+        "references": { "type": "array" },
+        "quiz": { "type": "array" },
+        "isFeatured": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["draft", "published"] },
+        "createdAt": { "type": "string" },
+        "tags": { "type": "array" },
+        "slug": { "type": "string" },
+        "seoMetaTitle": { "type": "string" },
+        "seoMetaDescription": { "type": "string" }
+      },
+      "required": ["id", "titleEn", "titleUr", "category", "readingTime", "ageGroup", "shortDescriptionEn", "shortDescriptionUr", "contentEn", "contentUr", "status"]
+    },
+    "Feedback": {
+      "title": "Feedback",
+      "description": "User feedback for a story",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "storyId": { "type": "string" },
+        "storyTitle": { "type": "string" },
+        "rating": { "type": "number" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["unread", "read"] },
+        "createdAt": { "type": "string" },
+        "approved": { "type": "boolean" }
+      },
+      "required": ["id", "name", "storyId", "storyTitle", "rating", "message", "status", "createdAt", "approved"]
+    },
+    "Video": {
+      "title": "Video",
+      "description": "An Islamic children's video",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "duration": { "type": "string" },
+        "category": { "type": "string" },
+        "ageGroup": { "type": "string", "enum": ["4-6", "7-9", "10-12", "all"] },
+        "isFeatured": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "language": { "type": "string" },
+        "tags": { "type": "array" },
+        "publishDate": { "type": "string" },
+        "folderId": { "type": "string" },
+        "views": { "type": "number" }
+      },
+      "required": ["id", "title", "description", "videoUrl", "thumbnail", "duration", "category", "ageGroup", "isFeatured", "createdAt"]
+    },
+    "VideoFolder": {
+      "title": "VideoFolder",
+      "description": "A folder to group Islamic children's videos",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "createdAt"]
+    },
+    "KidProfile": {
+      "title": "KidProfile",
+      "description": "A child profile under a parent account",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "parentId": { "type": "string" },
+        "name": { "type": "string" },
+        "age": { "type": "number" },
+        "avatar": { "type": "string" },
+        "points": { "type": "number" },
+        "streak": { "type": "number" },
+        "lastActive": { "type": "string" },
+        "favoriteStories": { "type": "array" },
+        "badges": { "type": "array" },
+        "completedStories": { "type": "array" },
+        "lastStoryRead": { "type": "string" },
+        "lastVideoWatched": { "type": "string" },
+        "readingPercentage": { "type": "number" },
+        "readingTime": { "type": "number" },
+        "quizScores": { "type": "object" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "parentId", "name", "age", "avatar", "points", "streak", "createdAt"]
+    },
+    "ScholarQuestion": {
+      "title": "ScholarQuestion",
+      "description": "An Islamic question submitted by a parent or child",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "childAge": { "type": "number" },
+        "country": { "type": "string" },
+        "language": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "question": { "type": "string" },
+        "email": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "answered", "rejected"] },
+        "createdAt": { "type": "string" },
+        "answeredAt": { "type": "string" },
+        "answerId": { "type": "string" },
+        "viewCount": { "type": "number" },
+        "bookmarkCount": { "type": "number" },
+        "isFeatured": { "type": "boolean" },
+        "isVerified": { "type": "boolean" }
+      },
+      "required": ["id", "name", "childAge", "country", "language", "category", "title", "question", "status", "createdAt"]
+    },
+    "ScholarAnswer": {
+      "title": "ScholarAnswer",
+      "description": "An authentic, child-friendly answer to an Islamic question",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "questionId": { "type": "string" },
+        "answerText": { "type": "string" },
+        "quranReference": { "type": "string" },
+        "hadithReference": { "type": "string" },
+        "keyLesson": { "type": "string" },
+        "actionStep": { "type": "string" },
+        "verifiedBy": { "type": "string" },
+        "scholarId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "questionId", "answerText", "quranReference", "hadithReference", "keyLesson", "actionStep", "verifiedBy", "createdAt"]
+    },
+    "Scholar": {
+      "title": "Scholar",
+      "description": "A verified Islamic scholar profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "title": { "type": "string" },
+        "credentials": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "bio": { "type": "string" },
+        "isVerified": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "title", "credentials", "photoUrl", "bio", "isVerified", "createdAt"]
+    },
+    "Hadith": {
+      "title": "Hadith",
+      "description": "An authentic Hadith document stored in Firestore",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "titleEn": { "type": "string" },
+        "titleUr": { "type": "string" },
+        "category": { "type": "string" },
+        "arabicText": { "type": "string" },
+        "translationEn": { "type": "string" },
+        "translationUr": { "type": "string" },
+        "book": { "type": "string" },
+        "hadithNumber": { "type": "string" },
+        "grade": { "type": "string" },
+        "narrator": { "type": "string" },
+        "explanationEn": { "type": "string" },
+        "explanationUr": { "type": "string" },
+        "moralLessonEn": { "type": "string" },
+        "moralLessonUr": { "type": "string" },
+        "tags": { "type": "array" },
+        "featuredImage": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "published"] },
+        "publishedDate": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "titleEn", "category", "arabicText", "translationEn", "translationUr", "book", "status", "createdAt"]
+    },
+    "DailyDua": {
+      "title": "DailyDua",
+      "description": "An authentic Daily Dua document stored in Firestore",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "titleEn": { "type": "string" },
+        "titleUr": { "type": "string" },
+        "category": { "type": "string" },
+        "arabicText": { "type": "string" },
+        "translationEn": { "type": "string" },
+        "translationUr": { "type": "string" },
+        "transliteration": { "type": "string" },
+        "reference": { "type": "string" },
+        "benefitsEn": { "type": "string" },
+        "benefitsUr": { "type": "string" },
+        "explanationEn": { "type": "string" },
+        "explanationUr": { "type": "string" },
+        "tags": { "type": "array" },
+        "featuredImage": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "published"] },
+        "publishedDate": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "titleEn", "category", "arabicText", "translationEn", "translationUr", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/hadiths/{hadithId}": {
+      "schema": "Hadith",
+      "description": "Collection of authentic Hadiths stored in Firestore"
+    },
+    "/duas/{duaId}": {
+      "schema": "DailyDua",
+      "description": "Collection of authentic Daily Duas stored in Firestore"
+    },
+    "/stories/{storyId}": {
+      "schema": "Story",
+      "description": "Collection of Islamic stories for kids"
+    },
+    "/feedback/{feedbackId}": {
+      "schema": "Feedback",
+      "description": "Collection of user feedback on stories"
+    },
+    "/videos/{videoId}": {
+      "schema": "Video",
+      "description": "Collection of Islamic videos for kids"
+    },
+    "/video_folders/{folderId}": {
+      "schema": "VideoFolder",
+      "description": "Collection of folders for organizing videos"
+    },
+    "/kid_profiles/{profileId}": {
+      "schema": "KidProfile",
+      "description": "Collection of children's profiles under parent accounts"
+    },
+    "/scholar_questions/{questionId}": {
+      "schema": "ScholarQuestion",
+      "description": "Collection of submitted Q&A questions"
+    },
+    "/scholar_answers/{answerId}": {
+      "schema": "ScholarAnswer",
+      "description": "Collection of answers to submitted questions"
+    },
+    "/scholars/{scholarId}": {
+      "schema": "Scholar",
+      "description": "Collection of verified Islamic scholar profiles"
+    }
+  }
+}

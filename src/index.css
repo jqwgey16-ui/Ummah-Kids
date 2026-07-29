@@ -1,0 +1,333 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   PRIMARY WORLD-CLASS WEB FONTS (@font-face)
+   ========================================================================== */
+
+/* KFGQPC Uthmanic Script Hafs - Quran.com Standard Quran Font */
+@font-face {
+  font-family: 'KFGQPC Uthmanic Script HAFS';
+  src: url('https://cdn.jsdelivr.net/gh/quran/quran.com-frontend-next@master/public/fonts/uthmanic_hafs/uthmanic_hafs.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/quran/quran.com-frontend-next@master/public/fonts/uthmanic_hafs/uthmanic_hafs.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Uthmanic Hafs';
+  src: url('https://cdn.jsdelivr.net/gh/quran/quran.com-frontend-next@master/public/fonts/uthmanic_hafs/uthmanic_hafs.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   GLOBAL TAILWIND CSS THEME CONFIGURATION
+   ========================================================================== */
+
+@theme {
+  --font-sans: "Nunito", "Inter", "Poppins", "Segoe UI", "Arial", sans-serif;
+  --font-urdu: "Noto Nastaliq Urdu", "Noto Nastaliq", "Nafees Nastaleeq", "Jameel Noori Nastaleeq", serif;
+  --font-arabic: "KFGQPC Uthmanic Script HAFS", "Amiri Quran", "Uthmanic Hafs", "Amiri", "Noto Naskh Arabic", serif;
+  --font-quran: "KFGQPC Uthmanic Script HAFS", "Amiri Quran", "Uthmanic Hafs", "Amiri", "Noto Naskh Arabic", serif;
+}
+
+/* --- THEME SYSTEM CORE VARIABLES (Apple & Notion Clean Aesthetics) --- */
+:root {
+  --bg-base: #fafafa;        /* Clean minimal soft-off-white background */
+  --bg-card: #ffffff;        /* Pure white for cards */
+  --text-primary: #0f172a;   /* Deep slate-900 for high legibility */
+  --text-secondary: #334155; /* Slate-700 for body text */
+  --text-muted: #64748b;     /* Slate-500 for small captions */
+  --border-subtle: #e2e8f0;  /* Subtle light gray line */
+  --shadow-color: 0, 0, 0;
+}
+
+html.dark {
+  --bg-base: #0b0f19;        /* Notion/Apple dark slate background */
+  --bg-card: #131b2e;        /* Dark navy card surface */
+  --text-primary: #f8fafc;   /* Soft crisp white */
+  --text-secondary: #cbd5e1; /* Slate-300 secondary */
+  --text-muted: #94a3b8;     /* Muted slate-400 */
+  --border-subtle: #1e293b;  /* Subtle dark border */
+  --shadow-color: 0, 0, 0;
+}
+
+/* --- GLOBAL LAYOUT & RESETS --- */
+html, body {
+  background-color: var(--bg-base) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang="en"] body,
+html[lang="en"] {
+  font-family: "Nunito", "Inter", "Poppins", sans-serif;
+}
+
+html[lang="ur"] body,
+html[lang="ur"] {
+  font-family: "Noto Nastaliq Urdu", "Noto Nastaliq", serif;
+}
+
+html[lang="ar"] body,
+html[lang="ar"] {
+  font-family: "Amiri Quran", "Amiri", "Noto Naskh Arabic", serif;
+}
+
+/* Enable smooth transitions for theme properties */
+html.theme-transition,
+html.theme-transition * {
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, fill 200ms ease, stroke 200ms ease, box-shadow 200ms ease !important;
+}
+
+/* ==========================================================================
+   SPECIFIC LANGUAGE TYPOGRAPHY CLASSES & UTILITIES
+   ========================================================================== */
+
+/* English / Sans-Serif Default */
+.font-sans {
+  font-family: "Nunito", "Inter", "Poppins", "Segoe UI", "Arial", sans-serif !important;
+}
+
+/* Arabic / Quranic Typography - World-Class Mushaf Style */
+.font-arabic,
+.font-quran,
+[data-font="arabic"] {
+  font-family: "KFGQPC Uthmanic Script HAFS", "Amiri Quran", "Uthmanic Hafs", "Amiri", "Noto Naskh Arabic", serif !important;
+  direction: rtl !important;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  word-spacing: 0.1em;
+}
+
+/* Quranic Ayah Dedicated High-Legibility Formatting */
+.quran-ayah-text,
+.mushaf-text {
+  font-family: "KFGQPC Uthmanic Script HAFS", "Amiri Quran", "Uthmanic Hafs", "Amiri", "Noto Naskh Arabic", serif !important;
+  direction: rtl !important;
+  line-height: 2.6 !important;
+  word-spacing: 0.15em;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Urdu Typography - Elegant Nastaliq Style */
+.font-urdu,
+[lang="ur"],
+[data-font="urdu"] {
+  font-family: "Noto Nastaliq Urdu", "Noto Nastaliq", "Nafees Nastaleeq", "Jameel Noori Nastaleeq", serif !important;
+  direction: rtl !important;
+  line-height: 2.3 !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Prevent clipping for inline or badge Urdu elements */
+button .font-urdu,
+a .font-urdu,
+span.font-urdu,
+.badge .font-urdu,
+label .font-urdu {
+  line-height: 2.0 !important;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  display: inline-block;
+}
+
+/* --- AUTOMATIC THEMING IN OVERRIDES (PREVENTS BROKEN COLOR CONTRAST) --- */
+
+/* Background Adaptations in Dark Mode */
+html.dark .bg-white,
+html.dark .bg-slate-50,
+html.dark .bg-gray-50,
+html.dark .bg-neutral-50,
+html.dark .bg-emerald-50\/40,
+html.dark .bg-teal-50\/40 {
+  background-color: var(--bg-card) !important;
+}
+
+html.dark .bg-slate-100,
+html.dark .bg-gray-100,
+html.dark .bg-neutral-100,
+html.dark .bg-slate-200\/50 {
+  background-color: var(--bg-base) !important;
+}
+
+/* Dynamic Gradients Adjustment for Dark Mode */
+html.dark .from-emerald-50,
+html.dark .from-teal-50,
+html.dark .from-blue-50,
+html.dark .from-indigo-50,
+html.dark .from-amber-50,
+html.dark .from-orange-50,
+html.dark .from-purple-50 {
+  --tw-gradient-from: #1e293b !important;
+  --tw-gradient-to: #0f172a !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+/* Text Colors Contrast Adaptations for Light and Dark Modes */
+html:not(.dark) {
+  color: #0f172a;
+}
+
+html:not(.dark) .font-urdu {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .font-arabic,
+html:not(.dark) .font-quran {
+  color: #064e3b; /* High-contrast deep emerald green for Arabic in light mode */
+}
+
+html.dark {
+  color: #ffffff;
+}
+
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-850,
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-black,
+html.dark .text-neutral-900,
+html.dark .text-slate-950 {
+  color: var(--text-primary) !important;
+}
+
+html.dark .text-slate-700,
+html.dark .text-slate-600,
+html.dark .text-gray-700,
+html.dark .text-gray-600,
+html.dark .text-neutral-700,
+html.dark .text-neutral-600 {
+  color: var(--text-secondary) !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-slate-400,
+html.dark .text-gray-500,
+html.dark .text-gray-400,
+html.dark .text-neutral-500,
+html.dark .text-neutral-400 {
+  color: var(--text-muted) !important;
+}
+
+/* High contrast for brand / category links in dark mode */
+html.dark .text-blue-600,
+html.dark .text-blue-700 {
+  color: #60a5fa !important;
+}
+
+html.dark .text-emerald-600,
+html.dark .text-emerald-700 {
+  color: #34d399 !important;
+}
+
+html.dark .text-teal-600,
+html.dark .text-teal-700 {
+  color: #2dd4bf !important;
+}
+
+html.dark .font-urdu {
+  color: #f8fafc !important; /* Maximum contrast for Urdu text in dark mode */
+}
+
+html.dark .font-arabic,
+html.dark .font-quran {
+  color: #6ee7b7 !important; /* Soft bright emerald teal for Arabic in dark mode */
+}
+
+/* Subtle Borders Override for Dark Mode */
+html.dark .border,
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-300\/30,
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-neutral-100,
+html.dark .border-neutral-200 {
+  border-color: var(--border-subtle) !important;
+}
+
+/* Form Elements Adaptations (Prevents light-on-light or dark-on-dark) */
+input, select, textarea {
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-subtle) !important;
+  font-family: var(--font-sans);
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border-color: var(--border-subtle) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Modal and Overlays */
+html.dark .bg-black\/50,
+html.dark .bg-slate-900\/50,
+html.dark .bg-black\/40 {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Shadows for Dark Mode */
+html.dark .shadow-sm,
+html.dark .shadow-md,
+html.dark .shadow-lg,
+html.dark .shadow-xl,
+html.dark .shadow-2xl {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.45), 0 4px 6px -4px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Elegant scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* --- BUTTON RIPPLE EFFECT --- */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-effect 600ms cubic-bezier(0, 0, 0.2, 1);
+  background-color: rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+}
+
+@keyframes ripple-effect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}

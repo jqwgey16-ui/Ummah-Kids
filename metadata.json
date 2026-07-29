@@ -1,0 +1,6 @@
+{
+  "name": "Ummah Kids",
+  "description": "Welcome to Ummah Kids, an authentic Islamic learning platform where children and families can explore the Quran, Prophets' Stories, Hadith, Daily Duas, Salah, Islamic Videos and an AI Islamic Teacher in a safe, beautiful and interactive environment.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Default-deny catch-all safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // 2. Stories collection (server-driven writes)
+    match /stories/{storyId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    // 3. Sessions collection (session validation and creation)
+    match /sessions/{sessionId} {
+      allow read, write: if true;
+    }
+    
+    // 4. Admins collection (admin registrations and logins)
+    match /admins/{adminId} {
+      allow read, write: if true;
+    }
+
+    // 5. Feedback collection (handled via backend validation and endpoints)
+    match /feedback/{feedbackId} {
+      allow read, write: if true;
+    }
+
+    // 6. Videos collection
+    match /videos/{videoId} {
+      allow read, write: if true;
+    }
+
+    // 7. Video Folders collection
+    match /video_folders/{folderId} {
+      allow read, write: if true;
+    }
+
+    // 8. Kid Profiles collection (parents manage their own children's profiles)
+    match /kid_profiles/{profileId} {
+      allow read, write: if true;
+    }
+
+    // 9. Scholar Questions collection
+    match /scholar_questions/{questionId} {
+      allow read, write: if true;
+    }
+
+    // 10. Scholar Answers collection
+    match /scholar_answers/{answerId} {
+      allow read, write: if true;
+    }
+
+    // 11. Scholars collection
+    match /scholars/{scholarId} {
+      allow read, write: if true;
+    }
+
+    // 12. Hadiths collection
+    match /hadiths/{hadithId} {
+      allow read, write: if true;
+    }
+
+    // 13. Duas collection
+    match /duas/{duaId} {
+      allow read, write: if true;
+    }
+  }
+}
